@@ -5,9 +5,43 @@ const apiKey = "476bdddaeamshb943785842c9b13p146fcejsn41cc646b161e";
 const apiHost = "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com";
 
 function formatRecipeListParams(params) {
-    const queryItems = Object.keys(params).map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`);
-    return queryItems.join("&");
+    const queryItems = Object.keys(params).map(key => 
+        `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`);
+        return queryItems.join("&");
 }
+
+function getRecipeSummary(id) {
+    fetch(`https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/${id}/information`, {
+	  "method": "GET",
+	  "headers": {
+		"x-rapidapi-host": apiHost,
+        "x-rapidapi-key": apiKey,
+    }
+    })
+    .then(response => {
+        console.log(response);
+        return response.json();
+    })
+    .then(responseJson => {
+        console.log(responseJson);
+        console.log(responseJson.summary);
+        if (responseJson.instructions == null) {
+            $(`.js-list-${responseJson.id}`).append(
+                `<p>${responseJson.summary}</p>
+                <p>Instructions: Not available</p>`
+            )
+        } else {
+        $(`.js-list-${responseJson.id}`).append(
+            `<p>${responseJson.summary}</p>
+            <p>Instructions: ${responseJson.instructions}</p>`
+            )
+        }
+    })
+    .catch(err => {
+    console.log(err);
+    });
+}
+
 
 function displayRecipeList(responseJson, maxResults) {
     console.log(responseJson);
@@ -19,6 +53,7 @@ function displayRecipeList(responseJson, maxResults) {
             </li>`
         )
         getRecipeSummary(responseJson[i].id);
+        //getInstructions(responseJson[i].id);
     }
     $('#js-search-results').removeClass('hidden');
 }
@@ -62,30 +97,6 @@ function watchform() {
         const maxResults = $("#js-max-results").val();
         getRecipeList(searchTerm, maxResults);
     })
-}
-
-function getRecipeSummary(id) {
-    fetch(`https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/${id}/summary`, {
-	  "method": "GET",
-	  "headers": {
-		"x-rapidapi-host": "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
-		"x-rapidapi-key": "476bdddaeamshb943785842c9b13p146fcejsn41cc646b161e"
-	  }
-  })
-   .then(response => {
-	  console.log(response);
-    return response.json();
-    })
-    .then(responseJson => {
-     console.log(responseJson);
-     console.log(responseJson.summary);
-     $(`.js-list-${responseJson.id}`).append(
-       `<p>${responseJson.summary}</p>`
-       )
-       })
-       .catch(err => {
-         console.log(err);
-      });
 }
 
 $(watchform);
