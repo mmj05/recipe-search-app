@@ -1,6 +1,7 @@
 'use strict';
 
 const listURL = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/findByIngredients";
+const videoURL = "https://tasty.p.rapidapi.com/recipes/list";
 const apiKey = "476bdddaeamshb943785842c9b13p146fcejsn41cc646b161e";
 const apiHost = "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com";
 
@@ -53,7 +54,6 @@ function displayRecipeList(responseJson, maxResults) {
             </li>`
         )
         getRecipeSummary(responseJson[i].id);
-        //getInstructions(responseJson[i].id);
     }
     $('#js-search-results').removeClass('hidden');
 }
@@ -90,12 +90,64 @@ function getRecipeList(query, maxResults) {
       })
 }
 
+function displayRecipeVideoList(responseJson) {
+    console.log(responseJson);
+    $("#results-list-videos").empty();
+    for ( let i = 0; i < responseJson.results.length; i++) {
+        if (responseJson.results[i].original_video_url !== null & responseJson.results[i].description !== "") {
+            $("#results-list-videos").append(
+                `<li>
+                <h3>${responseJson.results[i].name}</h3>
+                <p>${responseJson.results[i].description}</p>
+                <video controls width="400">
+                <source src="${responseJson.results[i].original_video_url}">
+                </video>
+                </li>`
+            )
+        } else {
+
+        }
+    }
+}
+
+function getRecipeVideoList(query) {
+    const params = {
+        q: query,
+        from: 0,
+        sizes: 10
+    };
+    const queryString = formatRecipeListParams(params);
+    const url = videoURL + "?" + queryString;
+
+    console.log(url);
+
+    const options = {
+        headers: new Headers({
+            "x-rapidapi-key": apiKey
+        })
+    };
+
+    fetch(url, options)
+      .then(response => {
+        console.log(response);
+          if (response.ok) {
+              return response.json();
+          }
+          throw new Error(response.statusText);
+      })
+      .then(responseJson => displayRecipeVideoList(responseJson))
+      .catch(err => {
+          $('#js-error-message').text(`Something went wrong: ${err.message}`);
+      })
+}
+
 function watchform() {
     $("form").submit(event => {
         event.preventDefault();
         const searchTerm = $("#js-search-term").val();
         const maxResults = $("#js-max-results").val();
         getRecipeList(searchTerm, maxResults);
+        getRecipeVideoList(searchTerm);
     })
 }
 
