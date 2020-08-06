@@ -29,7 +29,7 @@ function getRecipeSummary(id) {
         if (responseJson.instructions == null) {
             $(`.js-list-${responseJson.id}`).append(
                 `<p>${responseJson.summary}</p>
-                <p>Instructions: Not available</p>`
+                <p>Instructions: Not available for this recipe.</p>`
             )
         } else {
         $(`.js-list-${responseJson.id}`).append(
@@ -94,7 +94,7 @@ function displayRecipeVideoList(responseJson) {
     console.log(responseJson);
     $("#results-list-videos").empty();
     for ( let i = 0; i < responseJson.results.length; i++) {
-        if (responseJson.results[i].original_video_url !== null & responseJson.results[i].description !== "") {
+        if (responseJson.results[i].original_video_url !== null & (responseJson.results[i].description !== "" & responseJson.results[i].description !== null)) {
             $("#results-list-videos").append(
                 `<li>
                 <h3>${responseJson.results[i].name}</h3>
@@ -108,6 +108,7 @@ function displayRecipeVideoList(responseJson) {
 
         }
     }
+    $('#js-video-search-results').removeClass('hidden');
 }
 
 function getRecipeVideoList(query) {

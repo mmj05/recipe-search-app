@@ -5,24 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search For The Recipes Of Your Favorite Food</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="index.css">
 </head>
 <body>
-    <h1>Search For Your Favorite Recipe</h1>
-    <form>
-        <label for="js-search-term">Enter name of food or ingredients: </label>
-        <input type="text" id="js-search-term" placeholder="Name of food or ingredients">
-        <label for="js-max-results">Maximum results to return</label>
-        <input type="number" id="js-max-results" value="10">
-        <br>
-        <input type="submit">
-    </form>
+    <main>
+        <div class="bg-img">
+            <div class="container">
+                <h1>"Cooking is one of the great gifts you can give to those you love." - Ina Garten</h1>
+                <div class="child">
+                    <h2>Want to surprise your loved ones with delicious dishes? <br> Just enter the name of food or ingredients in the box below and choose from hundreds of awesome recipes.</h2>
+                    <form class="" wfd-id="2">
+                        <label for="js-search-term" wfd-id="4">Enter name of food or ingredients: </label>
+                        <input type="text" id="js-search-term" placeholder="Name of food or ingredients" kl_vkbd_parsed="true" spellcheck="false" data-ms-editor="true" wfd-id="7">
+                        <br>
+                        <label for="js-max-results" wfd-id="3">Maximum results to return</label>
+                        <br>
+                        <input type="number" id="js-max-results" value="10" kl_vkbd_parsed="true" wfd-id="6">
+                        <br>
+                        <input type="submit" kl_vkbd_parsed="true" wfd-id="5">
+                    </form>
+                </div>
+            </div>
+        </div>
 
-    <p id="js-error-message" class="error-message"></p>
-    <section id="js-search-results" class="hidden">
-        <ul id="results-list"></ul>
-        <ul id="results-list-videos"></ul>
-    </section>
+        <p id="js-error-message" class="error-message"></p>
+        <section id="js-search-results" class="hidden">
+            <h2>Top Results</h2>
+            <ul id="results-list"></ul>       
+        </section>
+        <section id="js-video-search-results" class="hidden">
+            <h2>You might also like these bonus recipes with video instrustions</h2>
+            <ul id="results-list-videos"></ul>
+        </section>
+    </main>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <script src="index.js"></script>
 </body>
