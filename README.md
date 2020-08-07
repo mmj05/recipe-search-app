@@ -36,6 +36,6 @@ Sample Result 2:
 
 - [Live Demo](https://mmj05.github.io/recipe-search-app/)
 
-## Authors
+## Author
 
 * **Muhaimin Jobayer**
