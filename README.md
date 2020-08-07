@@ -39,4 +39,3 @@ Sample Result 2:
 ## Authors
 
 * **Muhaimin Jobayer**
-

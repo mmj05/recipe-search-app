@@ -43,8 +43,7 @@ body {
 h1 {
     font-family: 'Itim', cursive;
     font-size: 30px;
-    color: #ccffee;
-    margin: 0;
+    color: #e6e6e6;
     padding: 20px 15px;
     text-align: center;
 }
@@ -59,23 +58,19 @@ h1 {
 
 .container h2 {
     flex: 1;
-    margin: 0;
     padding: 20px 20px;
     font-size: 20px;
     text-align: left;
-    color: #d9d9d9;
+    color: #e6e6e6;
     line-height: 1.3em;
     letter-spacing: 1px;
 }
 
 .container form {
-    margin: 0;
     text-align: left;
     font-size: 18px;
-    padding-top: 15px;
-    padding-left: 20px;
-    padding-right: 0px;
-    color: #d9d9d9;
+    padding: 15px 0 0 20px;
+    color: #e6e6e6;
     width: 100%;
 }
 

@@ -4,7 +4,7 @@ const listURL = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/rec
 const videoURL = "https://tasty.p.rapidapi.com/recipes/list";
 const apiKey = "476bdddaeamshb943785842c9b13p146fcejsn41cc646b161e";
 const apiHost = "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com";
-
+//Format fetch URL to perform get request
 function formatRecipeListParams(params) {
     const queryItems = Object.keys(params).map(key => 
         `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`);
@@ -20,7 +20,6 @@ function getRecipeSummary(id) {
     }
     })
     .then(response => {
-        console.log(response);
         return response.json();
     })
     .then(responseJson => {
@@ -81,7 +80,7 @@ function getRecipeList(query, maxResults) {
       })
       .then(responseJson => {
           console.log(responseJson);
-        displayRecipeList(responseJson, maxResults);
+          displayRecipeList(responseJson, maxResults);
       })
       .catch(err => {
           $("#js-error-message").text(`Something went wrong: ${err.message}`);
