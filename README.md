@@ -27,10 +27,10 @@ Sample Result 2:
 
 ## Built With
 
-HTML
-CSS
-JavaScript
-JQuery
+* HTML
+* CSS
+* JavaScript
+* JQuery
 
 ## Demo
 
