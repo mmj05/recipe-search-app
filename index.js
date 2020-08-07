@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 const listURL = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/findByIngredients";
 const videoURL = "https://tasty.p.rapidapi.com/recipes/list";
@@ -29,12 +29,12 @@ function getRecipeSummary(id) {
         if (responseJson.instructions == null) {
             $(`.js-list-${responseJson.id}`).append(
                 `<p>${responseJson.summary}</p>
-                <p>Instructions: Not available for this recipe.</p>`
+                <p><strong>Instructions: </strong>Not available for this recipe.</p>`
             )
         } else {
         $(`.js-list-${responseJson.id}`).append(
             `<p>${responseJson.summary}</p>
-            <p>Instructions: ${responseJson.instructions}</p>`
+            <p><strong>How to cook this recipe: </strong>${responseJson.instructions}</p>`
             )
         }
     })
@@ -43,9 +43,7 @@ function getRecipeSummary(id) {
     });
 }
 
-
 function displayRecipeList(responseJson, maxResults) {
-    console.log(responseJson);
     $("#results-list").empty();
     for ( let i = 0; i < responseJson.length & i < maxResults; i++) {
         $("#results-list").append(
@@ -55,7 +53,7 @@ function displayRecipeList(responseJson, maxResults) {
         )
         getRecipeSummary(responseJson[i].id);
     }
-    $('#js-search-results').removeClass('hidden');
+    $("#js-search-results, .top-results").removeClass('hidden');
 }
 
 function getRecipeList(query, maxResults) {
@@ -76,24 +74,24 @@ function getRecipeList(query, maxResults) {
 
     fetch(url, options)
       .then(response => {
-        console.log(response);
           if (response.ok) {
               return response.json();
           }
           throw new Error(response.statusText);
       })
       .then(responseJson => {
+          console.log(responseJson);
         displayRecipeList(responseJson, maxResults);
-        })
+      })
       .catch(err => {
-          $('#js-error-message').text(`Something went wrong: ${err.message}`);
+          $("#js-error-message").text(`Something went wrong: ${err.message}`);
       })
 }
 
-function displayRecipeVideoList(responseJson) {
+function displayRecipeVideoList(responseJson, maxResults) {
     console.log(responseJson);
     $("#results-list-videos").empty();
-    for ( let i = 0; i < responseJson.results.length; i++) {
+    for ( let i = 0; i < responseJson.results.length & i < maxResults; i++) {
         if (responseJson.results[i].original_video_url !== null & (responseJson.results[i].description !== "" & responseJson.results[i].description !== null)) {
             $("#results-list-videos").append(
                 `<li>
@@ -108,14 +106,14 @@ function displayRecipeVideoList(responseJson) {
 
         }
     }
-    $('#js-video-search-results').removeClass('hidden');
+    $("#js-video-search-results").removeClass("hidden");
 }
 
-function getRecipeVideoList(query) {
+function getRecipeVideoList(query, maxResults) {
     const params = {
         q: query,
         from: 0,
-        sizes: 10
+        sizes: maxResults
     };
     const queryString = formatRecipeListParams(params);
     const url = videoURL + "?" + queryString;
@@ -136,9 +134,12 @@ function getRecipeVideoList(query) {
           }
           throw new Error(response.statusText);
       })
-      .then(responseJson => displayRecipeVideoList(responseJson))
+      .then(responseJson => {
+          console.log(responseJson);
+          displayRecipeVideoList(responseJson, maxResults);
+      })
       .catch(err => {
-          $('#js-error-message').text(`Something went wrong: ${err.message}`);
+          $("#js-error-message").text(`Something went wrong: ${err.message}`);
       })
 }
 
@@ -148,7 +149,7 @@ function watchform() {
         const searchTerm = $("#js-search-term").val();
         const maxResults = $("#js-max-results").val();
         getRecipeList(searchTerm, maxResults);
-        getRecipeVideoList(searchTerm);
+        getRecipeVideoList(searchTerm, maxResults);
     })
 }
 
