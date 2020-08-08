@@ -136,6 +136,9 @@ function getRecipeVideoList(query) {
       .then(responseJson => {
           console.log(responseJson);
           displayRecipeVideoList(responseJson);
+          $('html,body').animate({
+            scrollTop: $(".top-results").offset().top},
+            1000);
       })
       .catch(err => {
           $("#js-error-message").text(`Something went wrong: ${err.message}`);
