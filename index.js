@@ -1,6 +1,6 @@
 "use strict";
 
-const listURL = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/findByIngredients";
+const listURL = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/";
 const videoURL = "https://tasty.p.rapidapi.com/recipes/list";
 const apiKey = "476bdddaeamshb943785842c9b13p146fcejsn41cc646b161e";
 const apiHost = "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com";
@@ -12,13 +12,13 @@ function formatRecipeListParams(params) {
 }
 
 function getRecipeSummary(id) {
-    fetch(`https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/${id}/information`, {
-	  "method": "GET",
-	  "headers": {
-		"x-rapidapi-host": apiHost,
-        "x-rapidapi-key": apiKey,
-    }
-    })
+    const url = listURL + `${id}/information`;
+    const options = {
+        headers: new Headers({
+            "x-rapidapi-key": apiKey
+        })
+    };
+    fetch(url, options)
     .then(response => {
         return response.json();
     })
@@ -61,7 +61,7 @@ function getRecipeList(query, maxResults) {
         ingredients: query
     };
     const queryString = formatRecipeListParams(params);
-    const url = listURL + "?" + queryString;
+    const url = listURL + "findByIngredients?" + queryString;
 
     console.log(url);
 
