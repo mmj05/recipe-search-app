@@ -3,7 +3,6 @@
 const listURL = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/";
 const videoURL = "https://tasty.p.rapidapi.com/recipes/list";
 const apiKey = "476bdddaeamshb943785842c9b13p146fcejsn41cc646b161e";
-const apiHost = "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com";
 //Format fetch URL to perform get request
 function formatRecipeListParams(params) {
     const queryItems = Object.keys(params).map(key => 
@@ -101,11 +100,9 @@ function displayRecipeVideoList(responseJson) {
                 </video>
                 </li>`
             )
-        } else {
-
+            $("#js-video-search-results").removeClass("hidden");
         }
     }
-    $("#js-video-search-results").removeClass("hidden");
 }
 
 function getRecipeVideoList(query) {
