@@ -74,6 +74,11 @@ h1 {
     width: 100%;
 }
 
+fieldset {
+    border: 0;
+    padding: 0; 
+}
+
 input[type="text"] {
     width: 95%;
     margin-top: 10px;
@@ -370,34 +375,18 @@ video {
 
     .container h2 {
         font-size: 40px;
-        line-height: 1.4em;
-        padding: 20px 35px;
     }
 
     .container form {
         font-size: 32px;
-        padding: 10px 30px 30px 40px;
     }
 
     .top-results {
         font-size: 30px;
     }
 
-    .flex-row {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: flex-start;
-    }
-
    .flex-row-item-2 {
         flex: 0 0 700px;
-    }
-
-    input[type="text"] {
-        width: 40%;
-        margin-top: 20px;
-        margin-bottom: 20px;
     }
     
     input[type="number"] {
