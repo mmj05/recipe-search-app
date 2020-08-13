@@ -15,15 +15,17 @@
                 <div class="child">
                     <h2>Want to surprise your loved ones with delicious dishes? <br> Just enter the name of food or ingredients in the box below and choose from hundreds of awesome recipes.</h2>
                     <form>
-                        <label for="js-search-term">Enter name of food or ingredients: </label>
-                        <br>
-                        <input type="text" id="js-search-term" placeholder="Name of food or ingredients">
-                        <br>
-                        <label for="js-max-results">Maximum results to return</label>
-                        <br>
-                        <input type="number" id="js-max-results" value="10">
-                        <br>
-                        <input type="submit">
+                        <fieldset>
+                            <label for="js-search-term">Enter name of food or ingredients: </label>
+                            <br>
+                            <input type="text" id="js-search-term" placeholder="Name of food or ingredients" required>
+                            <br>
+                            <label for="js-max-results">Maximum results to return</label>
+                            <br>
+                            <input type="number" id="js-max-results" value="10">
+                            <br>
+                            <input type="submit">
+                        </fieldset>
                     </form>
                 </div>
             </div>
